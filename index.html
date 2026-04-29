@@ -1,288 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HexForge Security</title>
+
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { margin:0; padding:0; box-sizing:border-box; }
+
     body {
-      background: radial-gradient(circle at top, #102033, #03060a 70%);
-      color: #e8faff;
       font-family: Arial, sans-serif;
+      background: radial-gradient(circle at top, #0d1a2a, #020406 70%);
+      color: #e8faff;
     }
+
     header {
-      padding: 24px 8%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid rgba(0,255,204,.2);
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:20px 8%;
+      border-bottom:1px solid rgba(0,255,200,.2);
     }
-    .logo { font-size: 24px; font-weight: 800; color: #00ffcc; }
-    nav a { color: #b9d8df; margin-left: 24px; text-decoration: none; }
+
+    .logo {
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:bold;
+      font-size:20px;
+      color:#00ffcc;
+    }
+
+    .logo img {
+      width:40px;
+      height:40px;
+      border-radius:10px;
+    }
+
+    nav a {
+      margin-left:20px;
+      color:#b9d8df;
+      text-decoration:none;
+    }
+
     .hero {
-      padding: 90px 8%;
-      display: grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 40px;
-      align-items: center;
+      padding:80px 8%;
+      display:grid;
+      grid-template-columns:1.2fr 1fr;
+      gap:40px;
+      align-items:center;
     }
+
     h1 {
-      font-size: 58px;
-      line-height: 1.05;
-      margin-bottom: 22px;
+      font-size:48px;
+      margin-bottom:20px;
     }
-    h1 span { color: #00ffcc; }
-    .hero p {
-      font-size: 19px;
-      color: #b9d8df;
-      line-height: 1.7;
-      margin-bottom: 30px;
-    }
+
+    h1 span { color:#00ffcc; }
+
     .btn {
-      display: inline-block;
-      padding: 14px 24px;
-      border-radius: 10px;
-      background: #00ffcc;
-      color: #00110d;
-      font-weight: 700;
-      text-decoration: none;
-      margin-right: 12px;
+      display:inline-block;
+      padding:14px 22px;
+      border-radius:10px;
+      background:#00ffcc;
+      color:#00110d;
+      font-weight:bold;
+      text-decoration:none;
+      margin-right:10px;
     }
+
     .btn.secondary {
-      background: transparent;
-      color: #00ffcc;
-      border: 1px solid #00ffcc;
+      background:transparent;
+      border:1px solid #00ffcc;
+      color:#00ffcc;
     }
+
     .panel {
-      background: rgba(4,12,20,.9);
-      border: 1px solid rgba(0,255,204,.25);
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 0 40px rgba(0,255,204,.12);
+      background:rgba(0,0,0,.5);
+      padding:20px;
+      border-radius:15px;
+      border:1px solid rgba(0,255,200,.2);
     }
-    .terminal {
-      background: #020407;
-      border-radius: 12px;
-      padding: 18px;
-      font-family: monospace;
-      color: #00ffcc;
-      min-height: 320px;
-    }
-    .terminal div { margin: 10px 0; }
-    .blur {
-      filter: blur(5px);
-      user-select: none;
-    }
+
     section {
-      padding: 70px 8%;
+      padding:70px 8%;
     }
-    .section-title {
-      text-align: center;
-      font-size: 38px;
-      margin-bottom: 20px;
+
+    .features {
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
     }
-    .section-sub {
-      text-align: center;
-      color: #a8c5cc;
-      margin-bottom: 45px;
-    }
-    .features, .plans {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
+
     .card {
-      background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.08);
-      padding: 26px;
-      border-radius: 16px;
+      background:rgba(255,255,255,.05);
+      padding:20px;
+      border-radius:12px;
     }
-    .card h3 { color: #00ffcc; margin-bottom: 12px; }
-    .card p { color: #b9d8df; line-height: 1.6; }
-    .price {
-      font-size: 34px;
-      font-weight: bold;
-      margin: 18px 0;
-    }
-    .badge {
-      display: inline-block;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: rgba(0,255,204,.12);
-      color: #00ffcc;
-      font-size: 13px;
-      margin-bottom: 12px;
-    }
+
     footer {
-      padding: 35px 8%;
-      border-top: 1px solid rgba(255,255,255,.08);
-      color: #86a7ad;
-      text-align: center;
+      text-align:center;
+      padding:30px;
+      border-top:1px solid rgba(255,255,255,.1);
+      color:#8fa5aa;
     }
-    input {
-      width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: 1px solid rgba(0,255,204,.3);
-      background: #050b10;
-      color: white;
-      margin-bottom: 12px;
-    }
-    button {
-      width: 100%;
-      padding: 14px;
-      border-radius: 10px;
-      border: none;
-      background: #00ffcc;
-      font-weight: 800;
-      cursor: pointer;
-    }
-    @media(max-width: 900px) {
-      .hero, .features, .plans { grid-template-columns: 1fr; }
-      h1 { font-size: 42px; }
-      nav { display: none; }
+
+    @media(max-width:900px){
+      .hero, .features {
+        grid-template-columns:1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">HexForge Security</div>
+  <div class="logo">
+    <!-- 👇 CAMBIA ESTA RUTA POR TU LOGO -->
+    <img src="logo.png" />
+    HexForge Security
+  </div>
+
   <nav>
     <a href="#features">Features</a>
-    <a href="#demo">Demo</a>
-    <a href="#plans">Plans</a>
-    <a href="#contact">Contact</a>
+    <a href="#start">Usar</a>
   </nav>
 </header>
 
 <section class="hero">
   <div>
-    <div class="badge">Cybersecurity platform in development</div>
-    <h1>AI-powered security testing for <span>modern bug bounty workflows</span>.</h1>
+    <h1>Escaneo web real para <span>seguridad moderna</span></h1>
+
     <p>
-      HexForge is being built as a security analysis platform focused on evidence-based findings,
-      safer validation, cleaner workflows and future AI-assisted reporting for security researchers.
+      HexForge Security es una herramienta open source diseñada para análisis
+      de seguridad web real, enfocada en resultados claros y útiles.
     </p>
-    <a class="btn" href="#demo">Try Preview</a>
-    <a class="btn secondary" href="#plans">View Plans</a>
+
+    <!-- 🔥 BOTÓN PRINCIPAL -->
+    <a class="btn" href="https://TU-APP.onrender.com" target="_blank">
+      🚀 Usar HexForge ahora
+    </a>
+
+    <a class="btn secondary" href="https://github.com" target="_blank">
+      Código abierto
+    </a>
   </div>
 
   <div class="panel">
-    <div class="terminal">
-      <div>> Initializing HexForge scan engine...</div>
-      <div>> Checking headers...</div>
-      <div>> Analyzing exposed client-side patterns...</div>
-      <div>> Reviewing security posture...</div>
-      <div style="color:#ffb347;">⚠ Missing security headers detected</div>
-      <div style="color:#ffb347;">⚠ Possible weak cookie configuration</div>
-      <div class="blur" style="color:#ff5555;">Critical finding details locked</div>
-      <div class="blur" style="color:#ff5555;">Advanced exploit validation locked</div>
-      <div>> Unlock advanced analysis in future Pro editions</div>
-    </div>
+    <p>> Ejemplo de análisis real:</p>
+    <br>
+    <p style="color:#ffb347;">⚠ Missing Content-Security-Policy</p>
+    <p style="color:#ffb347;">⚠ Missing X-Frame-Options</p>
+    <p style="color:#ffb347;">⚠ Insecure HTTP links detected</p>
+    <p style="color:#00ffcc;">✔ TLS válido</p>
   </div>
 </section>
 
 <section id="features">
-  <h2 class="section-title">Built for serious security workflows</h2>
-  <p class="section-sub">Lite starts simple. Pro and Specter will expand into advanced automation.</p>
+  <h2>Características</h2>
+  <br>
 
   <div class="features">
     <div class="card">
-      <h3>Evidence-based findings</h3>
-      <p>Designed to show technical evidence, not vague alerts. Findings should help researchers understand what was detected.</p>
+      <h3>Resultados reales</h3>
+      <p>Basado en análisis HTTP real, no simulaciones.</p>
     </div>
+
     <div class="card">
-      <h3>Multi-language interface</h3>
-      <p>Planned support for Spanish, English, Portuguese and Chinese so the interface feels natural to different users.</p>
+      <h3>Open Source</h3>
+      <p>Libre para usar, modificar y mejorar.</p>
     </div>
+
     <div class="card">
-      <h3>Future AI workflows</h3>
-      <p>Future editions will focus on AI-assisted analysis, validation, prioritization and professional vulnerability reporting.</p>
+      <h3>Escaneo rápido</h3>
+      <p>Analiza headers, cookies y seguridad básica en segundos.</p>
     </div>
   </div>
 </section>
 
-<section id="demo">
-  <h2 class="section-title">Live preview simulation</h2>
-  <p class="section-sub">This web preview is a visual demo. Full scanning runs inside the downloadable HexForge software.</p>
+<section id="start">
+  <h2>Empieza ahora</h2>
+  <br>
 
-  <div class="panel">
-    <input id="target" placeholder="https://example.com" />
-    <button onclick="runDemo()">Run Preview</button>
-    <div class="terminal" id="demoOutput" style="margin-top:16px;">
-      <div>> Waiting for target...</div>
-    </div>
-  </div>
-</section>
-
-<section id="plans">
-  <h2 class="section-title">Editions</h2>
-  <p class="section-sub">Lite will be public. Pro and Specter are planned private editions.</p>
-
-  <div class="plans">
-    <div class="card">
-      <div class="badge">Free</div>
-      <h3>HexForge Lite</h3>
-      <div class="price">$0</div>
-      <p>Community edition for basic web security checks, learning, testing and early feedback.</p>
-      <br>
-      <a class="btn" href="#">Coming Soon</a>
-    </div>
-
-    <div class="card">
-      <div class="badge">Planned</div>
-      <h3>HexForge Pro</h3>
-      <div class="price">Soon</div>
-      <p>Advanced validation, AI-assisted analysis, multi-target workflows and professional reporting.</p>
-      <br>
-      <a class="btn secondary" href="#">More Info Soon</a>
-    </div>
-
-    <div class="card">
-      <div class="badge">Premium</div>
-      <h3>HexForge Specter</h3>
-      <div class="price">Soon</div>
-      <p>Enterprise-grade automation, integrations, advanced dashboards, teams and multi-model AI workflows.</p>
-      <br>
-      <a class="btn secondary" href="#">More Info Soon</a>
-    </div>
-  </div>
-</section>
-
-<section id="contact">
-  <h2 class="section-title">Contact</h2>
-  <p class="section-sub">HexForge Security is currently in development by Brandon Steven Barrera Portillo.</p>
-  <div style="text-align:center;">
-    <a class="btn secondary" href="mailto:brandonstevenbarrera@gmail.com">Contact</a>
-    <a class="btn" href="https://www.paypal.com/donate/?hosted_button_id=S3335NNBYZXES" target="_blank">Support Development</a>
-  </div>
+  <a class="btn" href="https://TU-APP.onrender.com" target="_blank">
+    🚀 Abrir aplicación
+  </a>
 </section>
 
 <footer>
-  © 2026 HexForge Security. All rights reserved. Commercial use prohibited without permission.
+  © 2026 HexForge Security  
+  Uso comercial no permitido sin autorización.
 </footer>
-
-<script>
-function runDemo() {
-  const target = document.getElementById("target").value || "https://example.com";
-  const out = document.getElementById("demoOutput");
-
-  out.innerHTML = `
-    <div>> Target: ${target}</div>
-    <div>> Running lightweight web preview...</div>
-    <div>> Checking security headers...</div>
-    <div style="color:#ffb347;">⚠ Missing Content-Security-Policy</div>
-    <div style="color:#ffb347;">⚠ Missing X-Frame-Options</div>
-    <div>> Checking cookies...</div>
-    <div style="color:#ffb347;">⚠ Cookie hardening review recommended</div>
-    <div class="blur" style="color:#ff5555;">Advanced finding details locked</div>
-    <div class="blur" style="color:#ff5555;">Full validation available in downloadable editions</div>
-    <div>> Preview complete.</div>
-  `;
-}
-</script>
 
 </body>
 </html>
